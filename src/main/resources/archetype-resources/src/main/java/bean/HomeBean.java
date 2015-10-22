@@ -27,7 +27,7 @@ public class HomeBean {
 
     private String name;
 
-    private int age;
+    private String age;
 
     @PostConstruct
     public void init() {
@@ -49,6 +49,8 @@ public class HomeBean {
         adapter.setName(name);
         adapter.setAge(age);
         springService.putAdapter(sessionId, adapter);
+
+        WebContext.addWarning("feedback", "User ["  + name + "] added to list!");
     }
 
     public String getName() {
@@ -59,11 +61,11 @@ public class HomeBean {
         this.name = name;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

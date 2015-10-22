@@ -6,7 +6,7 @@ public class Adapter {
 
     private String name;
 
-    private Integer age;
+    private String age;
 
     public int getId() {
         return id;
@@ -24,11 +24,11 @@ public class Adapter {
         this.name = name;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 

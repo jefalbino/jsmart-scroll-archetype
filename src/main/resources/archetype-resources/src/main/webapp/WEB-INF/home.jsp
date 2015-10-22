@@ -18,10 +18,6 @@
 
             <sm:alert id="feedback">
                 <!-- Message will be added via WebContext on HomeBean -->
-
-                <div style="text-align: right;">
-                    <sm:button label="I got it!" onClick="$('#feedback').alert('close');" />
-                </div>
             </sm:alert>
 
             <sm:form>
@@ -31,28 +27,30 @@
                     <sm:validate look="warning" text="Name must be valid" />
                 </sm:input>
 
-                <sm:input id="name-id" type="number" label="Age" placeholder="Enter age" value="@{homeBean.age}">
+                <sm:input id="age-id" type="number" label="Age" placeholder="Enter age" value="@{homeBean.age}">
                     <sm:validate look="warning" text="Age must be valid" />
                 </sm:input>
 
                 <sm:button id="add-btn" ajax="true" label="Send" action="@{homeBean.addContent}" update="list"
-                        beforeSend="updateActionTables();">
+                        style="margin-top: 10px;" beforeSend="updateActionTables();" look="warning">
                     <sm:load />
-                    <sm:icon name="glyphicon-pencil" />
+                    <sm:icon name="glyphicon-pencil" style="margin-right: 5px;" />
                 </sm:button>
 
             </sm:form>
         </div>
 
         <div class="col-md-6" style="margin-top: 50px;">
-            <sm:list id="list" values="@{homeBean.myListAdapter}" var="item" scrollSize="10" maxHeight="500px;">
+            <sm:list id="list" values="@{homeBean.myListAdapter}" var="item" scrollSize="5" maxHeight="280px;">
 
                 <!-- Load component will present loading when request is done to get more list items via scroll -->
                 <sm:load type="h4" label=" Loading ..." />
 
                 <!-- Template to create each list row -->
                 <sm:row>
-                    <sm:header title="@{item.name}" />
+                    <sm:header type="h5" title="@{item.name}" />
+
+                    <sm:output value="Username description ;)" />
 
                     <sm:badge label="@{item.age}" />
                 </sm:row>
@@ -66,29 +64,47 @@
             </sm:list>
         </div>
 
-        <div class="col-md-6" style="margin-top: 30px;">
+        <div class="col-md-12" style="margin-top: 10px; clear: both;">
 
-            <sm:table id="table" striped="true">
+            <sm:table id="table" style="overflow-x: hidden;" scrollSize="5" maxHeight="150px;" striped="true">
 
-                <sm:column label="Action">
-                    <sm:output id="action-id" />
+                <sm:column label="Name">
+                    <sm:output id="name-row-id" />
                 </sm:column>
 
-                <sm:empty style="color: #ddd; font-size: 18px; text-align: center;">
+                <sm:column label="Age">
+                    <sm:output id="age-row-id" />
+                </sm:column>
+
+                <sm:column label="Action">
+                    <sm:output id="action-row-id" />
+                </sm:column>
+
+                <sm:empty style="color: #ddd; font-size: 18px; text-align: center; padding: 30px;">
                     <sm:icon name="glyphicon-bell" />
                     <sm:output value="No actions found on table" />
                 </sm:empty>
             </sm:table>
         </div>
 
-        <!-- Upload status functions -->
+
         <script type="text/javascript">
 
             /*!
              * Called before action via Ajax is done on server to keep track of clients action
              */
             function updateActionTables() {
-                JSmart.setProgressBar('upload-status', percent);
+                if (JSmart.isEmpty('table')) {
+                    JSmart.hideEmpty('table');
+                }
+                var name = $('#name-id').val();
+                var age =  $('#age-id').val();
+
+                var row = JSmart.createRow('table');
+
+                row.find('span[id="name-row-id"]').text(name);
+                row.find('span[id="age-row-id"]').text(age);
+                row.find('span[id="action-row-id"]').text('Included user [' + name + '] with age [' + age + '] to list!');
             }
         </script>
     </body>
