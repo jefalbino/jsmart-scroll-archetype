@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>JSmart Framework - File Archetype</title>
+        <title>JSmart Framework - Dynamic Scroll Archetype</title>
     </head>
 
     <body class="container">
@@ -31,6 +31,7 @@
                     <sm:validate look="warning" text="Age must be valid" />
                 </sm:input>
 
+                <!-- Button to send form content via Ajax and update the list -->
                 <sm:button id="add-btn" ajax="true" label="Send" action="@{homeBean.addContent}" update="list"
                         style="margin-top: 10px;" beforeSend="updateActionTables();" look="warning">
                     <sm:load />
@@ -66,6 +67,7 @@
 
         <div class="col-md-12" style="margin-top: 10px; clear: both;">
 
+            <!-- Table to work as template so we can add rows via JSmart function -->
             <sm:table id="table" style="overflow-x: hidden;" scrollSize="5" maxHeight="150px;" striped="true">
 
                 <sm:column label="Name">
