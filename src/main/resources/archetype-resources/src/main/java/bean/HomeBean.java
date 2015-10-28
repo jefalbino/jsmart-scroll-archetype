@@ -76,7 +76,7 @@ public class HomeBean {
     private class MyListAdapter extends ListAdapter<Adapter> {
 
         @Override
-        public List<Adapter> load(final int offsetIndex, final Object offset, final int size) {
+        public List<Adapter> load(int offsetIndex, Object offset, int size) {
 
             List<Adapter> list = springService.getAdapters(sessionId);
 
